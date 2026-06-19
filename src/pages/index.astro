@@ -1,0 +1,131 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const posts = await getCollection('blog');
+posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+---
+
+<BaseLayout title="Home">
+  <style>
+    .post-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .post-card {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2rem;
+    }
+    .post-card:last-child {
+      border-bottom: none;
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .post-location::before {
+      content: "📍 ";
+    }
+    .post-meta-sep {
+      color: var(--border);
+    }
+
+    .post-card h2 {
+      font-size: 1.4rem;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+    .post-card h2 a {
+      color: var(--text);
+      text-decoration: none;
+    }
+    .post-card h2 a:hover {
+      color: var(--accent);
+    }
+
+    .post-description {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .post-cover {
+      width: 100%;
+      max-height: 260px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+    }
+
+    .read-more {
+      font-family: system-ui, sans-serif;
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .read-more:hover { text-decoration: underline; }
+
+    .empty-state {
+      text-align: center;
+      color: var(--text-muted);
+      font-family: system-ui, sans-serif;
+      padding: 3rem 0;
+    }
+  </style>
+
+  {posts.length === 0 ? (
+    <div class="empty-state">
+      <p>No posts yet — the adventure is just beginning!</p>
+    </div>
+  ) : (
+    <div class="post-list">
+      {posts.map(post => (
+        <article class="post-card">
+          <div class="post-meta">
+            <span>{formatDate(post.data.date)}</span>
+            {post.data.location && (
+              <>
+                <span class="post-meta-sep">·</span>
+                <span class="post-location">{post.data.location}</span>
+              </>
+            )}
+          </div>
+
+          {post.data.cover && (
+            <img
+              src={post.data.cover}
+              alt={post.data.title}
+              class="post-cover"
+            />
+          )}
+
+          <h2><a href={`/blog/${post.slug}`}>{post.data.title}</a></h2>
+
+          {post.data.description && (
+            <p class="post-description">{post.data.description}</p>
+          )}
+
+          <a href={`/blog/${post.slug}`} class="read-more">Read more →</a>
+        </article>
+      ))}
+    </div>
+  )}
+</BaseLayout>

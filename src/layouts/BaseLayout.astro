@@ -1,0 +1,94 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description } = Astro.props;
+const blogName = "From the Isle of Patmos"; // ← Change this to whatever you want to call your blog
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description ?? "A travel blog"} />
+    <title>{title} — {blogName}</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --bg:         #faf8f5;
+        --bg-card:    #ffffff;
+        --text:       #2a2725;
+        --text-muted: #8a8480;
+        --accent:     #b06a3a;
+        --border:     #e8e3db;
+        --max-width:  680px;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 18px;
+        line-height: 1.7;
+        min-height: 100vh;
+      }
+
+      /* ── Header ── */
+      header {
+        border-bottom: 1px solid var(--border);
+        padding: 1.5rem 1rem;
+        text-align: center;
+      }
+      header a { text-decoration: none; color: inherit; }
+      .blog-name {
+        font-size: 1.1rem;
+        font-family: system-ui, sans-serif;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      .blog-subtitle {
+        font-size: 0.85rem;
+        font-family: system-ui, sans-serif;
+        color: var(--text-muted);
+        margin-top: 0.2rem;
+      }
+
+      /* ── Main content ── */
+      main {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 2.5rem 1.25rem 4rem;
+      }
+
+      /* ── Footer ── */
+      footer {
+        text-align: center;
+        padding: 2rem 1rem;
+        font-family: system-ui, sans-serif;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        border-top: 1px solid var(--border);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/">
+        <div class="blog-name">{blogName}</div>
+        <div class="blog-subtitle">Dispatches from somewhere out there</div>
+      </a>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      Made with ♥ while traveling
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <style>
+    .back-link {
+      display: inline-block;
+      font-family: system-ui, sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-bottom: 2rem;
+    }
+    .back-link:hover { color: var(--accent); }
+
+    .post-header {
+      margin-bottom: 2rem;
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .post-location::before { content: "📍 "; }
+    .post-meta-sep { color: var(--border); }
+
+    h1 {
+      font-size: 2rem;
+      line-height: 1.2;
+      margin-bottom: 0;
+    }
+
+    .cover-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin: 1.5rem 0 2rem;
+    }
+
+    /* ── Post body typography ── */
+    .post-body :global(p) {
+      margin-bottom: 1.4rem;
+    }
+    .post-body :global(h2) {
+      font-size: 1.3rem;
+      margin: 2rem 0 0.75rem;
+    }
+    .post-body :global(h3) {
+      font-size: 1.1rem;
+      margin: 1.75rem 0 0.5rem;
+    }
+    .post-body :global(img) {
+      width: 100%;
+      border-radius: 6px;
+      margin: 1.5rem 0;
+    }
+    .post-body :global(blockquote) {
+      border-left: 3px solid var(--accent);
+      padding-left: 1.2rem;
+      margin: 1.5rem 0;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .post-body :global(a) {
+      color: var(--accent);
+    }
+    .post-body :global(ul),
+    .post-body :global(ol) {
+      padding-left: 1.5rem;
+      margin-bottom: 1.4rem;
+    }
+    .post-body :global(li) {
+      margin-bottom: 0.4rem;
+    }
+    .post-body :global(hr) {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2.5rem 0;
+    }
+  </style>
+
+  <a href="/" class="back-link">← All posts</a>
+
+  <header class="post-header">
+    <div class="post-meta">
+      <span>{formatDate(post.data.date)}</span>
+      {post.data.location && (
+        <>
+          <span class="post-meta-sep">·</span>
+          <span class="post-location">{post.data.location}</span>
+        </>
+      )}
+    </div>
+    <h1>{post.data.title}</h1>
+  </header>
+
+  {post.data.cover && (
+    <img src={post.data.cover} alt={post.data.title} class="cover-image" />
+  )}
+
+  <div class="post-body">
+    <Content />
+  </div>
+</BaseLayout>
