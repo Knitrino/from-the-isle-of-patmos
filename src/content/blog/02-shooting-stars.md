@@ -14,4 +14,4 @@ Last night, we communed with the stars and each other. We shared a bottle of win
 ![Andrea awaits an interview with Poet Laureate Ada Limón on the veranda of the hotel.](/images/2227.jpeg)
 
 ---
-*Sending love from [Patmos] 💛*
+*Sending love from Patmos 💛*

@@ -24,4 +24,4 @@ When we attempted to ask the youthful fisherman (fisherkid?) what the peculiar p
 ![Steven and I take a selfie with Mr. IceCreamCone](</images/PHOTO-2026-06-24-17-40-32-3.jpg>)
 ![Snack Man!](</images/PHOTO-2026-06-24-17-40-33-2.jpg>)
 ---
-*Sending love from [Patmos] 💛*
+*Sending love from Patmos 💛*

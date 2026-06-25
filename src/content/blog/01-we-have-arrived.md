@@ -12,8 +12,7 @@ cover: "/images/good_morning.jpg"
 After many hours in airports and planes and a 9-hour ferry ride, we have arrived on the island of Patmos long after dark. Our biggest revelation came with the sunrise, when we made our way to the veranda and discovered the view. 
 
 
-![A view from our veranda.](/images/good_morning.jpg)
 
 
 ---
-*Sending love from [Patmos] 💛*
+*Sending love from Patmos 💛*
