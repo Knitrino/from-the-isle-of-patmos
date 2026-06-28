@@ -19,9 +19,9 @@ Unfortunately for us sisters, the host had the idea that we would sit at small t
 
 
 
-![patmos paradise, our hotel.](/images/paradise.jpeg)
-![petra.](/images/petra.jpeg)
-![tentacular dinner!](/images/octo.jpg) 
-![map of the island showing Petra's restaurant.](/images/petra_map.jpg)
+![patmos paradise, our hotel.](/images/paradise.jpg)
+![petra.](/images/petra.jpg)
+![tentacular dinner!](/images/octo.jpeg) 
+![map of the island showing Petra's restaurant.](/images/petra_map.jpeg)
 
 *Sending love from Patmos 💛*
