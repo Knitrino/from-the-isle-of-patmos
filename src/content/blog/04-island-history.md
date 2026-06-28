@@ -1,6 +1,6 @@
 ---
 title: "A Brief History of the Island"
-date: 2026-06-25
+date: 2026-06-22
 location: "Patmos, Greece"
 description: ""
 cover: "/images/IMG_3189.jpg"
